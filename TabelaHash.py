@@ -18,9 +18,9 @@ class tabelaHash:
     def apagaElemento(self, elemento, pos): #caso o usuario apague uma tarefa pela funcao no menu, tenho que apagar tambem da tabela hash
         self.tabelaHash[elemento].pop(pos)
 
-    def getTamLista(self, elemento):
+    def getTamLista(self, elemento): #retorno o tamanho da lista que constitui o valor do dicionario
         return len(self.tabelaHash[elemento])
 
-    def getElemLista(self, elemento, i):
+    def getElemLista(self, elemento, i): #retorno o elemento de determinada posicao da lista que constitui o parametro de valor do dicionario
         return int(self.tabelaHash[elemento][i])
             
