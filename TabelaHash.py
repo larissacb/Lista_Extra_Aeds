@@ -15,9 +15,6 @@ class tabelaHash:
     def addElementoRep(self, elemento, pos): #se o elemento ja existe, nao ha necessidade de criar uma lista nem uma nova posicao no dict
         self.tabelaHash[elemento].append(pos)
 
-    def apagaElemento(self, elemento, pos): #caso o usuario apague uma tarefa pela funcao no menu, tenho que apagar tambem da tabela hash
-        self.tabelaHash[elemento].pop(pos)
-
     def getTamLista(self, elemento): #retorno o tamanho da lista que constitui o valor do dicionario
         return len(self.tabelaHash[elemento])
 
