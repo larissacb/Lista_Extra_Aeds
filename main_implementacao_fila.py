@@ -120,40 +120,41 @@ while y == True:  # loop
         print("1 - Pesquisa por nome da tarefa")
         print("2 - Pesquisa por data de entrega")
         op=int(input("Digite um numero:\n"))
-
+        #varredura da agenda para separar os dados com o dicionario na classe tabelaHash
         i=0
         for i in range(agenda.getTamanho()):
+            #e preciso converter a data para uma string no formato que o usuario ira digitar
             var1=agenda.getPosicao(i).getDia()
             var2=agenda.getPosicao(i).getMes()
             var3=agenda.getPosicao(i).getAno()
             data=(str(var1)+ '/' + str(var2) + '/' + str(var3))
             #para data de entrega
-            if dataEntrega.verificaElemento(data):
+            if dataEntrega.verificaElemento(data): #se a chave ja existe no dicionario
                 dataEntrega.addElementoRep(data, i)
-            else:
+            else: #se a chave e nova no dicionario
                 dataEntrega.addElementoNovo(data, i)
+                
             #para nome da tarefa
             existeElemento = nomeTarefas.verificaElemento(agenda.getPosicao(i).getNome())
-            if existeElemento:
+            if existeElemento: #se a chave ja existe no dicionario
                 nomeTarefas.addElementoRep(agenda.getPosicao(i).getNome(), i)
-            else:
+            else: #se a chave e nova no dicionario
                 nomeTarefas.addElementoNovo(agenda.getPosicao(i).getNome(), i)
 
         if op == 1: #nome da tarefa
-            
             n=input("Informe o nome da tarefa a ser procurada: \n")
-            if nomeTarefas.verificaElemento(n):
-                for i in range(nomeTarefas.getTamLista(n)):
+            if nomeTarefas.verificaElemento(n): #verifica a existencia da tarefa a ser buscada no dicionario
+                for i in range(nomeTarefas.getTamLista(n)): #faço um loop para imprimir os elementos da agenda nas posiçoes que estao salvas na lista de valores do dicionario
                     agenda.getPosicao(nomeTarefas.getElemLista(n, i)).imprimir()
-            else:
+            else: #nao existe a tarefa informada
                 print("Tarefa inexistente")
                 
         elif op == 2: #data de entrega
             n=input("Informe a data de entrega a ser procurada: \n")
-            if dataEntrega.verificaElemento(n):
-                for i in range(dataEntrega.getTamLista(n)):
+            if dataEntrega.verificaElemento(n): #verifica a existencia da data de entrega a ser buscada no dicionario
+                for i in range(dataEntrega.getTamLista(n)): #faço um loop para imprimir os elementos da agenda nas posiçoes que estao salvas na lista de valores do dicionario
                     agenda.getPosicao(dataEntrega.getElemLista(n, i)).imprimir()
-            else:
+            else: #nao existe data de entrega informada
                 print("Tarefa inexistente")
         else:
             print("Opcao invalida")
@@ -166,5 +167,3 @@ while y == True:  # loop
         break #interrompe o loop
     
     else: print("Opcao invalida. Digite novamente")
-
-
