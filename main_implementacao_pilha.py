@@ -113,11 +113,19 @@ while y == True:  # loop
     elif x == 6: #Pesquisa com tabela Hash
         nomeTarefas=tabelaHash()
         dataEntrega=tabelaHash()
-        
-        print("Informe o tipo de pesquisa:")
-        print("1 - Pesquisa por nome da tarefa")
-        print("2 - Pesquisa por data de entrega")
-        op=int(input("Digite um numero:\n"))
+        aux=False
+        while (aux == False): #verificacao do que o usuario digitou
+            print("Informe o tipo de pesquisa:")
+            print("1 - Pesquisa por nome da tarefa")
+            print("2 - Pesquisa por data de entrega")
+            op1=(input("Digite um numero:\n"))
+            if (re.findall('[0-9]+', op1)):
+                aux = True
+                op=int(op1)
+                del op1
+            else:
+                print("Dado invalido. Digite novamente")
+
         #varredura da agenda para separar os dados com o dicionario na classe tabelaHash
         i=0
         for i in range(agenda.getTamanho()):
@@ -150,7 +158,13 @@ while y == True:  # loop
                 print("Tarefa inexistente")
                 
         elif op == 2: #data de entrega
-            n=input("Informe a data de entrega a ser procurada:\nFormato: dia/mes/ano\n")
+            aux=False
+            while (aux == False):
+                n=input("Informe a data de entrega a ser procurada:\nFormato: dia/mes/ano\n")
+                if (re.findall('[0-9]+/[0-9]+/[0-9]+', n)):
+                    aux = True
+                else:
+                    print("Dado invalido. Digite novamente")
             if dataEntrega.verificaElemento(n): #verifica a existencia da data de entrega a ser buscada no dicionario
                 i=0
                 for i in range(dataEntrega.getTamLista(n)): #faço um loop para imprimir os elementos da agenda nas posiçoes que estao salvas na lista de valores do dicionario
@@ -162,10 +176,19 @@ while y == True:  # loop
             print("Opcao invalida")
         
     elif x == 7: #Pesquisa sequencial
-        print("Informe o tipo de pesquisa:")
-        print("1 - Pesquisa por nome da tarefa")
-        print("2 - Pesquisa por data de entrega")
-        op=int(input("Digite um numero:\n"))
+        aux=False
+        while (aux == False): #verificacao do que o usuario digitou
+            print("Informe o tipo de pesquisa:")
+            print("1 - Pesquisa por nome da tarefa")
+            print("2 - Pesquisa por data de entrega")
+            op1=(input("Digite um numero:\n"))
+            if (re.findall('[0-9]+', op1)):
+                aux = True
+                op=int(op1)
+                del op1
+            else:
+                print("Dado invalido. Digite novamente")
+                
         if op == 1: #nome da tarefa
             n=input("Informe o nome da tarefa a ser procurada: \n")
             i=0
@@ -174,8 +197,15 @@ while y == True:  # loop
                     agenda.getPosicao(i).imprimir()
                     
         elif op == 2: #data de entrega
-            n=input("Informe a data de entrega a ser procurada:\nFormato: dia/mes/ano\n")
-            aux=n.split("/") #separo a string digitada a cada '/'
+            aux=False
+            while (aux == False): #verificacao do que o usuario digitou
+                n=input("Informe a data de entrega a ser procurada:\nFormato: dia/mes/ano\n")
+                if (re.findall('[0-9]+/[0-9]+/[0-9]+', n)):
+                    aux = True
+                else:
+                    print("Dado invalido. Digite novamente")
+            
+            aux=n.split('/') #separo a string digitada a cada '/'
             varDia=int(aux[0])
             varMes=int(aux[1])
             varAno=int(aux[2])
