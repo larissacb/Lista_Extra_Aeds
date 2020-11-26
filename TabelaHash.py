@@ -20,4 +20,4 @@ class tabelaHash:
 
     def getElemLista(self, elemento, i): #retorno o elemento de determinada posicao da lista que constitui o parametro de valor do dicionario
         return int(self.tabelaHash[elemento][i])
-            
+        
