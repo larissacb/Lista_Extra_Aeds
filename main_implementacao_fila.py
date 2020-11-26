@@ -7,8 +7,6 @@ import re
 #Algumas variaveis e estruturas usadas
 y = True
 agenda = fila()
-nomeTarefas=tabelaHash()
-dataEntrega=tabelaHash()
 tarefas = list()
 lista=list()
 pontuacao_ordenada=list()
@@ -26,7 +24,7 @@ def menu():
     print('4 - Ordenar os dados em ordem crescente para pontuacao')
     print('5 - Ordenar as tarefas pela data de entrega')
     print('6 - Pesquisa com tabela Hash')
-    print('7 - Pesquisa com outro metodo de pesquisa em memoria primaria')
+    print('7 - Pesquisa sequencial')
     print('0 - Sair')
     print("====================================================")
     x = int(input('Digite um numero: '))
@@ -116,6 +114,9 @@ while y == True:  # loop
         dia_ordenado.clear() #limpa a lista de dia ordenado
 
     elif x == 6: #Pesquisa com tabela Hash
+        nomeTarefas=tabelaHash()
+        dataEntrega=tabelaHash()
+        
         print("Informe o tipo de pesquisa:")
         print("1 - Pesquisa por nome da tarefa")
         print("2 - Pesquisa por data de entrega")
@@ -143,27 +144,57 @@ while y == True:  # loop
 
         if op == 1: #nome da tarefa
             n=input("Informe o nome da tarefa a ser procurada: \n")
+            i=0
             if nomeTarefas.verificaElemento(n): #verifica a existencia da tarefa a ser buscada no dicionario
                 for i in range(nomeTarefas.getTamLista(n)): #faço um loop para imprimir os elementos da agenda nas posiçoes que estao salvas na lista de valores do dicionario
                     agenda.getPosicao(nomeTarefas.getElemLista(n, i)).imprimir()
+                del nomeTarefas
             else: #nao existe a tarefa informada
                 print("Tarefa inexistente")
                 
         elif op == 2: #data de entrega
-            n=input("Informe a data de entrega a ser procurada: \n")
+            n=input("Informe a data de entrega a ser procurada:\nFormato: dia/mes/ano\n")
             if dataEntrega.verificaElemento(n): #verifica a existencia da data de entrega a ser buscada no dicionario
+                i=0
                 for i in range(dataEntrega.getTamLista(n)): #faço um loop para imprimir os elementos da agenda nas posiçoes que estao salvas na lista de valores do dicionario
                     agenda.getPosicao(dataEntrega.getElemLista(n, i)).imprimir()
+                del dataEntrega
             else: #nao existe data de entrega informada
                 print("Tarefa inexistente")
         else:
             print("Opcao invalida")
         
-    elif x == 7: #Pesquisa com outro metodo de pesquisa em memoria primaria
-        print("")
-        
+    elif x == 7: #Pesquisa sequencial
+        print("Informe o tipo de pesquisa:")
+        print("1 - Pesquisa por nome da tarefa")
+        print("2 - Pesquisa por data de entrega")
+        op=int(input("Digite um numero:\n"))
+        if op == 1: #nome da tarefa
+            n=input("Informe o nome da tarefa a ser procurada: \n")
+            i=0
+            for i in range(agenda.getTamanho()):
+                if agenda.getPosicao(i).getNome() == n: #comparo os nomes das tarefas na agenda com o que o usuario digitou 
+                    agenda.getPosicao(i).imprimir()
+                    
+        elif op == 2: #data de entrega
+            n=input("Informe a data de entrega a ser procurada:\nFormato: dia/mes/ano\n")
+            aux=n.split("/") #separo a string digitada a cada '/'
+            varDia=int(aux[0])
+            varMes=int(aux[1])
+            varAno=int(aux[2])
+            i=0
+            for i in range(agenda.getTamanho()):
+                if agenda.getPosicao(i).getDia()== varDia and agenda.getPosicao(i).getMes() == varMes and agenda.getPosicao(i).getAno() == varAno:
+                    agenda.getPosicao(i).imprimir()
+            del varDia
+            del varMes
+            del varAno
+        else:
+            print("Opcao Invalida")
     elif x == 0: #Sair
         agenda.FFVazia() #limpa a fila
         break #interrompe o loop
     
     else: print("Opcao invalida. Digite novamente")
+
+
